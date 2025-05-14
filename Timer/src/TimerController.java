@@ -42,18 +42,18 @@ public class TimerController {
 	private void start(ActionEvent event) {
 		
 		try {
-			// Parse input hours, minutes, seconds; default to 0 if empty
-			int hours = inputHours.getText().isEmpty() ? 0 : Integer.parseInt(inputHours.getText());
-			int minutes = inputMinutes.getText().isEmpty() ? 0 : Integer.parseInt(inputMinutes.getText());
-			int seconds = inputSeconds.getText().isEmpty() ? 0 : Integer.parseInt(inputSeconds.getText());
+		     // Parse input hours, minutes, seconds; default to 0 if empty
+		     int hours = inputHours.getText().isEmpty() ? 0 : Integer.parseInt(inputHours.getText());
+		     int minutes = inputMinutes.getText().isEmpty() ? 0 : Integer.parseInt(inputMinutes.getText());
+		     int seconds = inputSeconds.getText().isEmpty() ? 0 : Integer.parseInt(inputSeconds.getText());
 			
-			// Convert total input time to seconds
-			remainingSeconds = hours * 3600 + minutes * 60 + seconds;
-			secondsProgress = remainingSeconds;
+		     // Convert total input time to seconds
+		     remainingSeconds = hours * 3600 + minutes * 60 + seconds;
+		     secondsProgress = remainingSeconds;
 			
 			//If input time is zero or negative, show error and return
 	        if (remainingSeconds <= 0) {
-	        	display.setText("Invalid.");
+	            display.setText("Invalid.");
 	            return;
 	        }
 			
@@ -65,11 +65,11 @@ public class TimerController {
             // Create a new timeline that triggers every second
             timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
                 if (remainingSeconds > 0) {
-                	remainingSeconds--;     // Decrement seconds left
+                    remainingSeconds--;     // Decrement seconds left
                     updateLabel();          // Update displayed time
                     updateProgress();		// Update progress bar
                 } else {
-                	display.setText("Done!"); //Timer finished message
+                    display.setText("Done!"); //Timer finished message
                     timeline.stop(); 		  // Stop timeline when done
                 }
             }));
@@ -84,32 +84,32 @@ public class TimerController {
             
         } catch (NumberFormatException e) {
             // Show error message if input is not a valid number
-        	display.setText("Wrong Input!");
+            display.setText("Wrong Input!");
         }
     } 
 	
     // Method called when Pause button is clicked to pause the timer
-	@FXML
-	private void pause(ActionEvent event) {
+    @FXML
+     private void pause(ActionEvent event) {
 		
-		if (timeline != null) {
-			timeline.pause(); // If the timeline exists, it gets paused.
-		}
+	if (timeline != null) {
+	timeline.pause(); // If the timeline exists, it gets paused.
+      }
 		
-	}
+    }
 	
     // Method called when Reset button is clicked to reset everything
-	@FXML
-	private void reset(ActionEvent event) {
+    @FXML
+    private void reset(ActionEvent event) {
 		
-		progressBar.setProgress(0);
-	    timeline.stop();
-	    display.setText("00:00:00");
-		inputHours.clear();
-		inputMinutes.clear();
-		inputSeconds.clear();
+        progressBar.setProgress(0);
+        timeline.stop();
+	display.setText("00:00:00");
+	inputHours.clear();
+	inputMinutes.clear();
+	inputSeconds.clear();
 		
-	}
+     }
 	
     // Helper method to update the time display label in HH:mm:ss format
     private void updateLabel() {
